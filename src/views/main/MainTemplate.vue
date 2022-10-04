@@ -10,9 +10,6 @@
     created() {
       this.$store.commit("SET_LOADER", true);
     },
-    mounted() {
-      this.$store.commit("SET_LOADER", false);
-    },
   };
   </script>
   

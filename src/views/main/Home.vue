@@ -4,9 +4,12 @@
       <v-toolbar-title>Shipment information</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
-      <v-btn class="mb-5" to="create/"><v-icon>mdi-plus</v-icon>Create new order</v-btn>
-      <v-container style="max-height: 500px" class="overflow-y-auto">
+      <v-btn class="mb-5" to="create/"
+        ><v-icon>mdi-plus</v-icon>Create new order</v-btn
+      >
+      <v-container style="height: 500px" class="overflow-y-auto" v-if="loadData.length > 0">
         <v-card
+          
           v-for="(item, i) in loadData"
           v-bind:key="i"
           outlined
@@ -42,7 +45,9 @@
           </v-card-text>
         </v-card>
       </v-container>
-
+      <v-container style="height: 500px" v-else>
+      <div class="text-center text-h5">Add new data</div>
+      </v-container>
       <div class="text-center align-end">
         <v-pagination
           v-model="page"
@@ -80,11 +85,13 @@ export default {
   },
   methods: {
     changePage() {
-      this.$store.dispatch("API_GET", this.page-1);
+      this.$store.dispatch("API_GET", this.page - 1);
     },
   },
   mounted() {
-    this.$store.dispatch("API_GET");
+    this.$store
+      .dispatch("API_GET");
+    this.$store.commit("SET_LOADER", false);
   },
 };
 </script>

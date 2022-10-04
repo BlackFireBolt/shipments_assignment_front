@@ -237,9 +237,11 @@ export default {
       });
     },
     loadData() {
+
       this.$store
         .dispatch("API_RETRIEVE", this.$route.params.id)
         .then(() => (this.form = this.$store.getters.LOAD_SINGLE_DATA));
+        this.$store.commit("SET_LOADER", false);
     },
   },
   created() {
